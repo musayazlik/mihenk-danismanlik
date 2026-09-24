@@ -56,7 +56,8 @@ button.sidebar-workspace{width:100%;font:inherit;color:inherit;text-align:left;c
 button.sidebar-workspace:hover{border-color:#4d6673;background:#15303c}
 .sidebar-workspace .workspace-chevron{transition:transform .25s var(--ease)}
 .sidebar-workspace[aria-expanded="true"] .workspace-chevron{transform:rotate(180deg)}
-.workspace-menu{display:grid;gap:3px;margin:-14px 0 28px;padding:6px;border:1px solid #344651;background:#0d2530}
+.workspace-wrap{position:relative}
+.workspace-menu{position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:80;display:grid;gap:3px;padding:6px;border:1px solid #344651;background:#0d2530;box-shadow:0 22px 44px rgba(5,18,25,.45)}
 .workspace-menu[hidden]{display:none}
 .workspace-option{display:flex;align-items:center;gap:10px;width:100%;min-height:48px;padding:8px 10px;border:0;background:transparent;color:#b7c6c9;text-align:left;cursor:pointer;transition:background .2s,color .2s}
 .workspace-option:hover{background:#17323e;color:#fff}
