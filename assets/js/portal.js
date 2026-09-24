@@ -101,6 +101,56 @@
     });
   }
 
+  const workspaceBox = document.querySelector('.sidebar-workspace');
+  const workspaceMenu = document.getElementById('workspace-menu');
+  if (workspaceBox && workspaceMenu) {
+    const workspaceSymbol = workspaceBox.querySelector('[data-workspace-symbol]');
+    const workspaceName = workspaceBox.querySelector('[data-workspace-name]');
+    const workspaceRole = workspaceBox.querySelector('[data-workspace-role]');
+    const closeWorkspaceMenu = () => {
+      workspaceMenu.hidden = true;
+      workspaceBox.setAttribute('aria-expanded', 'false');
+    };
+    const applyWorkspace = (option) => {
+      workspaceMenu.querySelectorAll('.workspace-option').forEach((node) => {
+        const active = node === option;
+        node.classList.toggle('is-active', active);
+        if (active) node.setAttribute('aria-current', 'true');
+        else node.removeAttribute('aria-current');
+      });
+      workspaceSymbol.textContent = option.dataset.symbol;
+      workspaceName.textContent = option.dataset.name;
+      workspaceRole.textContent = option.dataset.role;
+    };
+    const savedWorkspace = read('workspace');
+    const savedOption = savedWorkspace.name
+      ? [...workspaceMenu.querySelectorAll('.workspace-option')].find((node) => node.dataset.name === savedWorkspace.name)
+      : null;
+    if (savedOption) applyWorkspace(savedOption);
+    workspaceBox.addEventListener('click', () => {
+      const open = workspaceMenu.hidden;
+      workspaceMenu.hidden = !open;
+      workspaceBox.setAttribute('aria-expanded', String(open));
+    });
+    workspaceMenu.querySelectorAll('.workspace-option').forEach((option) => {
+      option.addEventListener('click', () => {
+        applyWorkspace(option);
+        write('workspace', { symbol: option.dataset.symbol, name: option.dataset.name, role: option.dataset.role });
+        closeWorkspaceMenu();
+        workspaceBox.focus();
+      });
+    });
+    document.addEventListener('click', (event) => {
+      if (!event.target.closest('.sidebar-workspace, .workspace-menu')) closeWorkspaceMenu();
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !workspaceMenu.hidden) {
+        closeWorkspaceMenu();
+        workspaceBox.focus();
+      }
+    });
+  }
+
   const menuButton = document.querySelector('[data-menu-open]');
   const menu = document.querySelector('#admin-sidebar');
   const backdrop = document.querySelector('.admin-backdrop');
