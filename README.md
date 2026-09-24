@@ -17,13 +17,20 @@ Düz HTML/CSS ve küçük bir JavaScript dosyasıyla çalışan, Türkçe danı�
 
 ## Önizleme
 
-`index.html` dosyasını doğrudan açabilir veya proje klasöründe `python3 -m http.server 8000` komutunu çalıştırıp `http://localhost:8000` adresine gidebilirsiniz. Derleme, Bootstrap veya başka bir çatı gerektirmez.
+`index.html` dosyasını tarayıcıda doğrudan açabilir veya projeyi Vercel'e yükleyip canlı adres üzerinden görüntüleyebilirsiniz. Derleme, Bootstrap veya başka bir çatı gerektirmez.
+
+## Dağıtım
+
+Proje statik HTML olarak Vercel üzerinde yayında: https://mihenk-danismanlik.vercel.app
+
+- Kaynak kod: https://github.com/musayazlik/mihenk-danismanlik
+- Yayınlamak için proje klasöründe `vercel --prod` komutunu çalıştırın (Vercel CLI gerekir).
 
 ## Özelleştirme
 
 - Renkler, tipografi ve aralıklar: `assets/css/style.css` içindeki `:root` değişkenleri.
-- İçerik: ilgili `.html` dosyaları. Genel site ve blog sayfalarını yeniden üretmek için `python3 tools/build_pages.py` kullanılabilir; bu komut üretilmiş HTML değişikliklerini yeniden yazar. Blog yazıları `tools/blog_content.py` dosyasında düzenlenir.
-- Yönetim alanının temel sayfaları `python3 tools/build_portal.py`, yeni içerik ekranları `python3 tools/build_cms_pages.py` ile yeniden üretilebilir. Tasarım stilleri `assets/css/portal.css` ve `assets/css/cms.css`, etkileşimler `assets/js/portal.js` ve `assets/js/cms.js` içindedir.
+- İçerik: ilgili `.html` dosyaları doğrudan düzenlenir. Blog yazıları `blog-*.html` dosyalarında yer alır.
+- Yönetim alanı sayfaları: `*-admin.html` ve panel dosyaları. Tasarım stilleri `assets/css/portal.css` ve `assets/css/cms.css`, etkileşimler `assets/js/portal.js` ve `assets/js/cms.js` içindedir.
 - Etkileşimler: `assets/js/main.js`. Mobil menü, açılır alt menüler, görünürlük animasyonu, sayaçlar, proje ve blog filtreleri, paylaşım ve yorum davranışı burada.
 - Blog görünümü: `assets/css/blog.css`.
 - Görseller: `assets/images/`.
